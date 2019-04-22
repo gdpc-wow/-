@@ -1,0 +1,60 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="java.sql.*"%>
+
+<html>
+<head>
+<title>登录程序</title>
+</head>
+
+<body>
+	<%! 
+	public static final String DBDRIVER =  "oracle.jdbc.driver.OracleDriver" ;
+	public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:orcl" ;
+	public static final String DBUSER = "system" ;
+	public static final String PASSWORD = "26524623" ;
+	
+	
+   %>
+
+	<%
+   String mid= request.getParameter("mid");
+   String password= request.getParameter("password");
+   boolean flag =false ;
+   %>
+
+	<%
+   Connection conn = null;
+   PreparedStatement pstmt = null ;
+   ResultSet rs = null ;
+   Class.forName(DBDRIVER);
+   conn = DriverManager.getConnection(DBURL,DBUSER,PASSWORD);
+   String sql = "SELECT COUNT(mid) FROM member WHERE mid=? AND password=?" ;
+   pstmt = conn.prepareStatement(sql);
+   pstmt.setString(1, mid) ;
+   pstmt.setString(2, password) ;
+   rs =pstmt.executeQuery();
+   if(rs.next()){
+	   if(rs.getInt(1)==1){ //登录成功
+		   flag =true;
+	   }
+   }
+    conn.close();//数据库验证完毕，可以关闭连接
+   %>
+
+	<%
+   	if(flag==true){
+   		//登录成功,跳转
+
+   %>
+	<jsp:forward page="welcome.jsp" />
+	<%
+   	} else{
+  	%>
+	<jsp:forward page="login.jsp">
+		<jsp:param name="err" value="loginError" />
+	</jsp:forward>
+	<%
+   	}
+   	%>
+</body>
+</html>
