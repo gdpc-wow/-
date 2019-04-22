@@ -46,7 +46,7 @@
    		//登录成功,跳转
 
    %>
-	<jsp:forward page="welcome.jsp" />
+	<jsp:forward page="welcome.jsp" />  <!--暂时使用welcome界面替代，以后再跳转-->
 	<%
    	} else{
   	%>
