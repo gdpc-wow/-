@@ -1,0 +1,46 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<html>
+<head>
+<title>登录程序</title>
+<link rel="stylesheet" type="test/css" href="css/test.css">
+<script type="text/javascript" src="js/mldn.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+</head>
+<h1>用户登录</h1>
+<%
+if(request.getParameter("err")!=null){
+%>
+<h2>登录失败，错误的用户名或者密码</h2>
+<%
+}
+%>
+<body>
+	<form action="check.jsp" method="post" onsubmit="return validate()">
+		<table border="1" cellpadding="5" cellspacing="0" width="100%"
+			bgcolor="#F2F2F2"">
+
+			<tr onmouseout="changeColor(this,'#F2F2F2')"
+				onmousemove="changeColor(this,'#F2F2F2')">
+				<td>用户名</td>
+				<td><input type="text" name="mid" id="mid" class="init"
+					onblur="valiedateMid()"></td>
+				<td><span id="midMsg"></span></td>
+			</tr>
+			<tr onmouseout="changeColor(this,'#F2F2F2')"
+				onmousemove="changeColor(this,'#F2F2F2')">
+				<td>密码</td>
+				<td><input type="password" name="password" id="password"
+					class="init" onblur="valiedatePassword()"></td>
+				<td><span id="passwordMsg"></span></td>
+			</tr>
+			<tr onmouseout="changeColor(this,'#F2F2F2')"
+				onmousemove="changeColor(this,'#F2F2F2')">
+				<td colspan="3"><input type="submit" value="登录"> <input
+					type="reset" value="重置"></td>
+			</tr>
+
+		</table>
+	</form>
+</body>
+</html>
